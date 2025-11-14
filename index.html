@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .time {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 200;
+            opacity: 0.9;
+        }
+
+        .greeting {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.85;
+        }
+
+        .features {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            min-width: 200px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .time {
+                font-size: 1.8rem;
+            }
+            .greeting {
+                font-size: 1.2rem;
+            }
+            .features {
+                gap: 1rem;
+            }
+            .feature {
+                min-width: 150px;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>你好 👋</h1>
+        <div class="time" id="time"></div>
+        <div class="greeting" id="greeting"></div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🌟</div>
+                <div class="feature-title">简洁优雅</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-title">快速响应</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💡</div>
+                <div class="feature-title">现代设计</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+
+            if (hour >= 5 && hour < 12) {
+                greeting = '早上好！新的一天开始了 ☀️';
+            } else if (hour >= 12 && hour < 18) {
+                greeting = '下午好！继续加油 🌤️';
+            } else if (hour >= 18 && hour < 22) {
+                greeting = '晚上好！辛苦了一天 🌙';
+            } else {
+                greeting = '夜深了，早点休息 ✨';
+            }
+
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        updateTime();
+        updateGreeting();
+        setInterval(updateTime, 1000);
+        setInterval(updateGreeting, 60000);
+    </script>
+</body>
+</html>
